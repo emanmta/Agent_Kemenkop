@@ -1,5 +1,4 @@
 import google.generativeai as genai
-from google.generativeai.client import Client
 from google.generativeai.types import Part
 from app.core.config import settings
 
@@ -18,11 +17,11 @@ def transcribe_audio(audio_bytes: bytes, mime_type: str) -> str:
         raise ValueError("GEMINI_API_KEY environment variable not set")
 
     genai.configure(api_key=settings.GEMINI_API_KEY)
-    client = Client()
+    client = genai.Client()
 
-    response = client.generate_content(
-        model="models/gemini-1.5-flash",
-        content=[
+    response = client.models.generate_content(
+        model="gemini-2.5-flash",
+        contents=[
             "Generate a transcript of the speech.",
             Part.from_bytes(
                 data=audio_bytes,
