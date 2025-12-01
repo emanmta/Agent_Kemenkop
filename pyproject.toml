@@ -1,0 +1,15 @@
+[project]
+name = "agent-kemenkop"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi",
+    "uvicorn",
+    "python-dotenv",
+    "google-generativeai",
+    "python-multipart>=0.0.20",
+    "hypercorn>=0.18.0",
+    "pydantic-settings>=2.0.0",
+]
