@@ -2,7 +2,7 @@ import os
 import mimetypes
 from fastapi import FastAPI, UploadFile, File, HTTPException, Security
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
-from app.ai_service import transcribe_audio as transcribe_audio_service
+from app.service.ai_service import transcribe_audio as transcribe_audio_service
 from app.core.config import settings
 
 app = FastAPI()
