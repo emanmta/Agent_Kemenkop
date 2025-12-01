@@ -1,5 +1,4 @@
 import google.generativeai as genai
-from google.generativeai.types import Part
 from app.core.config import settings
 
 def transcribe_audio(audio_bytes: bytes, mime_type: str) -> str:
@@ -13,20 +12,19 @@ def transcribe_audio(audio_bytes: bytes, mime_type: str) -> str:
     Returns:
         The transcription text.
     """
-    if not settings.GEMINI_API_KEY:
-        raise ValueError("GEMINI_API_KEY environment variable not set")
+    if not settings.GOOGLE_API_KEY:
+        raise ValueError("GOOGLE_API_KEY environment variable not set")
 
-    genai.configure(api_key=settings.GEMINI_API_KEY)
-    client = genai.Client()
+    genai.configure(api_key=settings.GOOGLE_API_KEY)
 
-    response = client.models.generate_content(
-        model="gemini-2.5-flash",
-        contents=[
-            "Generate a transcript of the speech.",
-            Part.from_bytes(
-                data=audio_bytes,
-                mime_type=mime_type,
-            )
-        ]
+    model = genai.GenerativeModel('gemini-2.5-flash')
+
+    audio_part = {
+        "mime_type": mime_type,
+        "data": audio_bytes
+    }
+
+    response = model.generate_content(
+        ["Generate a transcript of the speech.", audio_part]
     )
     return response.text

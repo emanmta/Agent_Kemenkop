@@ -6,8 +6,9 @@ load_dotenv()
 
 class Settings(BaseSettings):
     APP_HOST: str = "0.0.0.0"
-    APP_PORT: int = 8000
-    GEMINI_API_KEY: str = os.getenv("GEMINI_API_KEY")
+    APP_PORT: int = 8001
+    GOOGLE_API_KEY: str
+    API_KEY: str
 
     class Config:
         env_file = ".env"

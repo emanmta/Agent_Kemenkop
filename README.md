@@ -30,7 +30,8 @@ This project provides a simple API for transcribing audio files using FastAPI an
     Create a `.env` file in the root of the project and add your Gemini API key:
 
     ```
-    GEMINI_API_KEY="your_api_key_here"
+    GOOGLE_API_KEY="your_google_api_key_here"
+    API_KEY="your_secret_api_key"
     ```
 
 ## How to Run
@@ -43,7 +44,7 @@ This project provides a simple API for transcribing audio files using FastAPI an
 
 2.  **Access the API:**
 
-    The API will be available at `http://0.0.0.0:8000`.
+    The API will be available at `http://0.0.0.0:8001`.
 
 ## API Usage
 
@@ -57,7 +58,10 @@ This project provides a simple API for transcribing audio files using FastAPI an
 **Example using `curl`:**
 
 ```bash
-curl -X POST -F "file=@/path/to/your/audio.mp3" http://127.0.0.1:8000/transcribe/
+curl -X POST \
+  -F "file=@/path/to/your/audio.mp3" \
+  -H "Authorization: Bearer your_secret_api_key" \
+  http://127.0.0.1:8001/transcribe/
 ```
 
 **Example response:**
